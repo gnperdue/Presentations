@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>INCITE 2016</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# INCITE
+
+```bash
+Gabriel N. Perdue, Fermilab, 2016/April/4
+```
+
+---
+
+# Outline
+
+1. Physics goals
+2. Comments on working at Oak Ridge
+
+---
+
+# Physics goals
+
+Broadly, we have two types of goals:
+
+1. Specific physics measurements where we will use the deep net to improve 
+part of the measurement, or open up new possible measurements.
+2. Learning how to apply deep learning to particle physics and, in particular,
+how to reconcile weaknesses in the simulation.
+
+---
+
+# Physics measurements
+
+1. Improved vertex finding in the passive target region for DIS measurements
+on nuclear targets as a function of A.
+2. Charged particle multiplicity in the tracker region and in the passive
+targets.
+3. EM/Hadronic recoil fractions.
+4. Photon / neutron separation.
+5. Photon shower finding.
+6. Recoil energy for inclusive events.
+7. Neutral pion detection.
+8. Neutral current inclusive cross sections.
+9. Differential cross sections in neutral current neutral pion momentum and angle.
+
+---
+
+# Fundamental problems with the generator
+
+One of the trickiest problems we must deal with is a multitude of known deficiencies
+in the simulation. 
+As a GENIE author, I am well aware of the many places the generator has problems -
+and these are just the "known unknowns."
+
+---
+
+# Comments on working at Oak Ridge
+
+The computing environment is different than we are used to on FNAL VMs.
+We've documented our experiences with the storage system, job submission, etc. and
+we're generally happy to share what we've learned to help bootstrap projects.
+
+[Caffe](http://caffe.berkeleyvision.org) is a good framework choice. 
+One of the main problems on Titan is that it is not possible to run small numbers 
+of long jobs - so it is very important to
+have good check-point tools (run your job until it is killed and then restart it).
+It is also relatively easier to use monitoring and profiling tools with a C++
+base application.
+
+We are able to run [Theano](http://deeplearning.net/software/theano/index.html) 
+but it is harder to profile with the tools on hand
+and we need to develop a checkpoint system in order to run longer jobs.
+Likely this means we need to finally begin migrating to Caffe for production.
+
+---
+
+# Scaling for INCITE
+
+We need to demonstrate that we can actually use a significant portion of Titan.
+This means we need to be able to productively deploy many thousands of jobs.
+Generically, I see two ways to scale deep learning applications on Titan's
+hardware:
+
+1. Run many, many configurations of the "same" network tackling an identical 
+problem and use the multitude of configurations to optimize a network and 
+hopefully learn something abot why it is optimal.
+2. Run many networks attacking different problems. The more physics questions
+we can ask with the same datasets, the better. This means we need good metadata
+tracking and that we need lots of different problems.
+
+Ultimately, we will need to do _both_.
+R. Patton and S. Young's evolutionary hyper-parameter optimization will be very
+helpful for part 1.
+For part 2 we need carefully explore the set of questions we can attack efficiently.
+What data sets can we re-use?
+Are we better preparing very general datasets?
+Or are the advantages of target or tracker region datasets worth it? 
+How much MC event metadata can we reasonably store?
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
