@@ -24,15 +24,67 @@ class: center, middle
 # INCITE
 
 ```bash
-Gabriel N. Perdue, Fermilab, 2016/April/4
+Gabriel N. Perdue, Fermilab, 2016/May/3
 ```
 
 ---
 
 # Outline
 
-1. Physics goals
-2. Comments on working at Oak Ridge
+1. INCITE - big picture
+2. Physics goals
+3. Comments on working at Oak Ridge
+4. Scaling for INCITE
+5. Writing the proposal
+
+The goal today is get all of us comfortable with the science story underpinning
+the proposal.
+Once we're in agreement, I think it will be easy to bring our colleagues at
+Oak Ridge along (they are not worried about the specific physics questions).
+
+---
+
+# INCITE
+
+We have one significant problem to deal with: the INCITE proposal guidance
+specifically discourages "umbrella" proposals.
+So we need to be sure we appear "coherent enough."
+They _do_ encourage "community proposals," so there is a good reason to think we
+both can and will be more successful as a joint effort than as competing efforts.
+
+So far, the cleanest story we seem to be able to tell is that this is centrally
+a computer science proposal - we plan on studying deep learning techniques as they
+apply to particle physics. 
+We will employ similar tools and technologies in two different experiments to
+enhance our ability to generalize what we learn but we are not currently planning
+on a joint-experiment cross section measurement, etc.
+
+We _may_ be able to perform some sort of "transfer learning" between the detectors,
+but we need to be careful with this - I think we need to demonstrate some success
+in order to be able to claim we can do that.
+
+---
+
+# INCITE, continued
+
+Before I talk to the program manager, I want the best possible "story" we can
+tell.
+Right now that is studying deep learning techniques and using them to produce
+new physics results in MINERvA and NOvA.
+The imapct of this work is better neutrino physics and possibly a revolution in
+neutrino event reconstruction.
+
+Two big questions:
+
+1. Are all of us on board with this approach?
+2. How do we make this story better?
+
+The output of a program like this will be:
+
+1. MINERvA physics papers
+2. NOvA physics papers
+3. MENNDL deep learning papers
+4. Joint deep learning papers
 
 ---
 
@@ -45,30 +97,37 @@ part of the measurement, or open up new possible measurements.
 2. Learning how to apply deep learning to particle physics and, in particular,
 how to reconcile weaknesses in the simulation.
 
----
+The physics story we want to tell in MINERvA consists of "walking through a 
+hierarchy" of measurements that go from minimially dependent on the details of
+the simulation (and especially the event generator), e.g., vertex finding in
+passive targets to maximally dependent, e.g., neutrino energy.
 
-# Physics measurements
-
-1. Improved vertex finding in the passive target region for DIS measurements
-on nuclear targets as a function of A.
-2. Charged particle multiplicity in the tracker region and in the passive
-targets.
-3. EM/Hadronic recoil fractions.
-4. Photon / neutron separation.
-5. Photon shower finding.
-6. Recoil energy for inclusive events.
-7. Neutral pion detection.
-8. Neutral current inclusive cross sections.
-9. Differential cross sections in neutral current neutral pion momentum and angle.
+What is the physics story we want to tell with NOvA and how do we harmonize the
+approaches?
 
 ---
 
-# Fundamental problems with the generator
+# Physics measurements - "simple"
 
-One of the trickiest problems we must deal with is a multitude of known deficiencies
-in the simulation. 
-As a GENIE author, I am well aware of the many places the generator has problems -
-and these are just the "known unknowns."
+1. The structure and performance of deep networks - impacted by every physics item - some highlight different aspects of the problem (e.g., transfer learning, etc.)
+2. Vertex finding in passive targets - MINERvA only
+3. Hadron multiplicity - MINERvA only + NOvA only + MINERvA - NOvA "joint" in an energy range (on carbon) (aka "three approaches"...)
+4. Photon/neutron separation - (three approaches...)
+5. EM/had ratios - (three approaches...)
+6. Recoil energy - (three approaches...)
+7. Neutral pion reconstruction - (three approaches...)
+8. Neutrino flavor and energy - (three approaches...)
+9. Varied GENIE samples to study MC sensitivity - (three approaches...)
+
+---
+
+# Physics measurements - harder
+
+1. Can the deep network tell the difference between simulation and data? - MINERvA and NOvA, quite separately
+2. transfer learning - how to do this? - one possibility is to run convolutions until the representation is "highly semantic" and then compare the fully-connected back portions of the networks between MINERvA and NOvA, or use one to pretrain for the other 
+3. Network architectures for studying these problems - statistical analysis of deep networks for different types of problems (classification vs. regression, MINERvA vs. NOvA), 
+4. Using MENNDL to estimate systematic uncertainties 
+5. Compare and contrast MINERvA and NOvA to understand GENIE dependencies, etc.
 
 ---
 
@@ -107,13 +166,47 @@ we can ask with the same datasets, the better. This means we need good metadata
 tracking and that we need lots of different problems.
 
 Ultimately, we will need to do _both_.
-R. Patton and S. Young's evolutionary hyper-parameter optimization will be very
-helpful for part 1.
+R. Patton and S. Young's evolutionary hyper-parameter optimization will be decisive for part 1.
 For part 2 we need carefully explore the set of questions we can attack efficiently.
 What data sets can we re-use?
 Are we better preparing very general datasets?
-Or are the advantages of target or tracker region datasets worth it? 
-How much MC event metadata can we reasonably store?
+
+We need to consider these questions as we put the INCITE together so we can be
+sure we are seeking the correct level of resources.
+
+---
+
+# Writing the proposal
+
+The current title is "Large scale deep neural network optimization for neutrino
+physics."
+
+Let's do better.
+
+We're working with a private GitHub repository to track the LaTeX document.
+Everyone needs to get their GitHub username to Jon Miller in order to be able
+to push and pull there.
+We should take one week to review the outline and submit comments on general
+content.
+At that point, we should convene a phone meeting with everyone who plans on 
+signing the proposal and discuss how to break down writing different sections.
+I will take responsibility for integration and submission (among other things).
+
+---
+
+# Writing the proposal, cont.
+
+We do not expect everyone who is signing the proposal and planning to participate
+to write significant portions of the proposal.
+Everyone will need to contribute CVs, etc. and we will need to discuss everyone's
+role in using computing resources.
+It will also be important for everyone to help read and review the document.
+
+I think it is okay and expected to have widely varying levels of engagement (so, 
+some of us may only be analyzers consuming the output of this research, and
+others will be deeply involved in the neural network algorithms, etc.).
+
+
 
     </textarea>
     <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
